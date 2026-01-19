@@ -1,0 +1,4 @@
+/* Tailwind CSS v4 configuration file */
+/* This file is used by Tailwind CSS IntelliSense extension for autocomplete and hover previews */
+@import 'tailwindcss';
+@plugin 'daisyui';

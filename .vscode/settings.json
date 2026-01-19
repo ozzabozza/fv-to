@@ -2,17 +2,18 @@
   // Automatically format code when you save a file
   // This ensures consistent code style across the project without manual formatting
   "editor.formatOnSave": true,
+  // Prettier-specific settings
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": false,
+  "prettier.enable": true,
+  // Set Prettier as the default formatter for all files
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   // Configure code actions that run automatically when saving
   "editor.codeActionsOnSave": {
-    // Automatically fix all ESLint errors that can be auto-fixed when saving
-    // This helps maintain code quality and consistency by fixing linting issues automatically
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
 
   // TypeScript import preference settings
   "typescript.preferences.importModuleSpecifier": "non-relative"
-  // When auto-importing or organizing imports, prefer non-relative import paths
-  // Example: Instead of "../../../utils/helper", use "@app/utils/helper" or "utils/helper"
-  // This makes imports cleaner and easier to maintain, especially in deep directory structures
 }
