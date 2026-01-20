@@ -48,6 +48,10 @@ export class FavoritesService {
     this.favorites.update(favorites => favorites.filter(f => f.id !== joke.id));
   }
 
+  getFavorites(): ChuckNorrisJokeResponse[] {
+    return this.favorites();
+  }
+
   isMaxFavoritesReached(): boolean {
     return this.maxFavoritesReached();
   }
