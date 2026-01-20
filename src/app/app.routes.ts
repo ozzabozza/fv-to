@@ -1,3 +1,12 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { JokesComponent } from './features/jokes/jokes';
+import { AppLayoutComponent } from './layout/app-layout/app-layout';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: AppLayoutComponent,
+    children: [{ path: '', component: JokesComponent }],
+  },
+];

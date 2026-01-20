@@ -1,0 +1,22 @@
+<li class="max-h-14 min-h-14 flex-row flex items-center gap-2 border-b border-gray-200 bg-base-100 p-2"
+  [class.rounded-t-lg]="index === 0" [class.rounded-b-lg]="index === 9">
+  <img class="size-10 rounded-box" [src]="joke.icon_url" [alt]="'Chuck Norris joke'" />
+
+  <div class="flex min-w-0 flex-1 items-center">
+    <div class="line-clamp-2 text-xs break-words opacity-80">{{ joke.value }}</div>
+  </div>
+
+  <div class="tooltip" [attr.data-tip]="isMaxFavoritesReached ? 'Max favorites reached' : 'Toggle favorite'">
+    <button class="btn btn-circle btn-ghost" (click)="toggleFavorite.emit(!isFavorite)"
+      [disabled]="isMaxFavoritesReached && !isFavorite">
+      <svg class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+          [attr.fill]="!isFavorite ? 'none' : 'currentColor'" stroke="currentColor">
+          <path
+            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+          </path>
+        </g>
+      </svg>
+    </button>
+  </div>
+</li>
