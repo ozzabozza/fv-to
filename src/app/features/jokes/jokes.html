@@ -9,7 +9,6 @@
     <app-joke-list-item [joke]="joke" [index]="i" [isFavorite]="favoritesService.isFavorite(joke)"
       [isMaxFavoritesReached]="favoritesService.isMaxFavoritesReached()"
       (toggleFavorite)="favoritesService.toggleFavorite($event, joke)"></app-joke-list-item>
-    <app-joke-list-item [joke]="joke" [index]="i"></app-joke-list-item>
     }
     @if (!jokesService.isInitialLoading() && jokesService.jokes().length === 0) {
     <div class="flex h-full w-full items-center justify-center py-12">
@@ -19,4 +18,5 @@
     </div>
     }
   </ul>
+  <app-joke-timer (timerEnded)="jokesService.updateJoke()"></app-joke-timer>
 </div>
