@@ -1,4 +1,4 @@
-<div class="flex min-h-screen flex-col items-center justify-center gap-4 bg-base-200">
+<div class="bg-base-200 flex min-h-screen flex-col items-center justify-center gap-4">
   <header role="banner">
     <div class="mx-auto flex max-w-7xl px-4">
       <h1 class="text-2xl font-bold">Joke App</h1>
@@ -7,16 +7,22 @@
 
   <div class="flex flex-col items-center">
     <nav role="navigation" aria-label="Main navigation">
-      <ul class="menu menu-vertical gap-2 rounded-md bg-base-300 inset-shadow-sm lg:menu-horizontal">
+      <ul class="menu menu-vertical bg-base-300 lg:menu-horizontal gap-2 rounded-md inset-shadow-sm">
         <li>
-          <a routerLink="/" routerLinkActive="bg-primary text-primary-content font-bold"
-            [routerLinkActiveOptions]="{ exact: true }">
+          <a
+            routerLink="/"
+            routerLinkActive="bg-primary text-primary-content font-bold"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             New Jokes
           </a>
         </li>
         <li>
-          <a routerLink="/favorites" routerLinkActive="bg-primary text-primary-content font-bold"
-            [routerLinkActiveOptions]="{ exact: true }">
+          <a
+            routerLink="/favorites"
+            routerLinkActive="bg-primary text-primary-content font-bold"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             Jokes Aside
           </a>
         </li>
