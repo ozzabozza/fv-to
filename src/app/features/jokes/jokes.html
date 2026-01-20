@@ -1,0 +1,19 @@
+<div class="mx-auto flex max-w-1/2 min-w-1/2 flex-col items-center gap-4 p-4">
+  <ul class="h-full min-h-[576px] w-[700px] flex-1 rounded-2xl bg-base-300 p-2 inset-shadow-sm">
+    @if (jokesService.isInitialLoading()) {
+    <div class="flex h-full w-full items-center justify-center py-12">
+      <span class="loading loading-lg loading-spinner"></span>
+    </div>
+    }
+    @for (joke of jokesService.jokes(); track joke.id; let i = $index) {
+    <!-- list items here -->
+    }
+    @if (!jokesService.isInitialLoading() && jokesService.jokes().length === 0) {
+    <div class="flex h-full w-full items-center justify-center py-12">
+      <div class="alert alert-warning">
+        <span>No jokes available. Please try again later.</span>
+      </div>
+    </div>
+    }
+  </ul>
+</div>
