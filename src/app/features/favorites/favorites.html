@@ -1,0 +1,9 @@
+<div class="mx-auto flex max-w-1/2 min-w-1/2 flex-col items-center gap-4 p-4">
+  <ul
+    class="flex flex-col h-full mb-[120px] min-h-[576px] w-[700px] flex-1 rounded-2xl bg-base-300 p-2 inset-shadow-sm">
+    @for (joke of favoritesService.getFavorites(); track joke.id; let i = $index) {
+    <app-joke-list-item [joke]="joke" [index]="i" [isFavorite]="favoritesService.isFavorite(joke)"
+      (toggleFavorite)="favoritesService.toggleFavorite($event, joke)"></app-joke-list-item>
+    }
+  </ul>
+</div>
