@@ -1,4 +1,5 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 
 import { JokeTimerComponent } from './joke-timer';
 
@@ -25,33 +26,51 @@ describe('JokeTimerComponent', () => {
    * it continues from the remaining time when it was paused,
    * rather than resetting to the initial time
    */
-  it('should resume from remaining time when paused timer is resumed', fakeAsync(() => {
+  it('should resume from remaining time when paused timer is resumed', () => {
+    // Use Vitest's fake timers to control time without zone.js
+    // Must be set up BEFORE creating the component so the interval uses fake timers
+    vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] });
+
+    // Create a new component instance with fake timers active
+    const testFixture = TestBed.createComponent(JokeTimerComponent);
+    const testComponent = testFixture.componentInstance;
+    testFixture.detectChanges();
+
     // Timer starts automatically in ngOnInit with 5 seconds
-    expect(component.timeLeft()).toBe(5);
-    expect(component.isRunning()).toBe(true);
+    expect(testComponent.timeLeft()).toBe(5);
+    expect(testComponent.isRunning()).toBe(true);
 
     // Let the timer run for 2 seconds (should be at 3 seconds now)
-    tick(2000);
-    expect(component.timeLeft()).toBe(3);
+    // Advance timers by 2000ms, which should trigger 2 interval callbacks (1000ms each)
+    vi.advanceTimersByTime(2000);
+    testFixture.detectChanges(); // Ensure Angular processes the signal updates
+    expect(testComponent.timeLeft()).toBe(3);
 
     // Pause the timer
-    component.toggleTimer();
-    expect(component.isRunning()).toBe(false);
-    const pausedTime = component.timeLeft();
+    testComponent.toggleTimer();
+    testFixture.detectChanges();
+    expect(testComponent.isRunning()).toBe(false);
+    const pausedTime = testComponent.timeLeft();
     expect(pausedTime).toBe(3);
 
     // Wait a bit while paused - time should not change
-    tick(1000);
-    expect(component.timeLeft()).toBe(3);
+    vi.advanceTimersByTime(1000);
+    testFixture.detectChanges();
+    expect(testComponent.timeLeft()).toBe(3);
 
     // Resume the timer
-    component.toggleTimer();
-    expect(component.isRunning()).toBe(true);
+    testComponent.toggleTimer();
+    testFixture.detectChanges();
+    expect(testComponent.isRunning()).toBe(true);
 
     // Let it run for 1 more second
-    tick(1000);
+    vi.advanceTimersByTime(1000);
+    testFixture.detectChanges(); // Ensure Angular processes the signal updates
 
     // Should be at 2 seconds (continued from 3, not reset to 5)
-    expect(component.timeLeft()).toBe(2);
-  }));
+    expect(testComponent.timeLeft()).toBe(2);
+
+    // Clean up fake timers
+    vi.useRealTimers();
+  });
 });
