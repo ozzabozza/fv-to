@@ -1,0 +1,48 @@
+@let time = timeLeft();
+@let running = isRunning();
+<div class="flex items-center gap-2 rounded-box bg-base-300 p-2 text-center">
+  <div class="flex flex-col rounded-box bg-neutral p-2 text-neutral-content">
+    <span class="countdown font-mono text-5xl">
+      <span [style.--value]="time" aria-live="polite" [attr.aria-label]="time">
+        {{ time }}
+      </span>
+    </span>
+    sec
+  </div>
+  <button
+    class="btn btn-circle"
+    [ngClass]="{ 'bg-red-600 text-white': running }"
+    (click)="toggleTimer()"
+    [attr.aria-label]="running ? 'Pause timer' : 'Play timer'"
+  >
+    @if (running) {
+      <!-- Pause icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="size-[1.2em]"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+      </svg>
+    } @else {
+      <!-- Play icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="size-[1.2em]"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z"
+        />
+      </svg>
+    }
+  </button>
+</div>
